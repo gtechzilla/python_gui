@@ -1,4 +1,5 @@
 import sys
+#imports our widgets
 from PyQt5.QtWidgets import QApplication,QWidget
 from PyQt5.QtGui import QIcon
 
