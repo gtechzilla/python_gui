@@ -1,10 +1,10 @@
 import sys
 #imports our widgets
-from PyQt5.QtWidgets import QApplication,QWidget,QLineEdit,QPushButton
+from PyQt5.QtWidgets import QApplication,QWidget,QLineEdit,QPushButton,QAction,QMainWindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
 
-class App(QWidget):
+class App(QMainWindow):
 
     def __init__(self):
         #to initialize the widget
@@ -23,6 +23,27 @@ class App(QWidget):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left,self.top,self.width,self.height)
         
+        #adding menu bar to our window
+        mainMenu = self.menuBar()
+        fileMenu = mainMenu.addMenu('File')
+        editMenu = mainMenu.addMenu('Edit')
+        viewMenu = mainMenu.addMenu('View')
+        searchMenu = mainMenu.addMenu('Search')
+        toolsMenu = mainMenu.addMenu('Tools')
+
+        #creating the items or button within the file in the menu bar
+        openButton = QAction('Open',self)
+        openButton.setShortcut('Ctrl + O')
+        openButton.setStatusTip('Open File')
+        openButton.triggered.connect(self.open)
+        fileMenu.addAction(openButton)
+
+        printButton = QAction('Print',self)
+        printButton.setShortcut('Ctrl + P')
+        printButton.setStatusTip('Open File')
+        printButton.triggered.connect(self.open)
+        fileMenu.addAction(printButton)
+
         #create a textbox
         self.textbox1 = QLineEdit(self)
         #positon the textbox on the window
@@ -40,12 +61,17 @@ class App(QWidget):
         #this function displays the window
         self.show()
     
+    def open(self):
+        print('Open file')
+    
     @pyqtSlot()
     def onClick(self):
         textbox1Value= self.textbox1.text()
         textboxValue= self.textbox.text()
-        if textbox1Value == "Wamlambez" and textboxValue == "Wamnyonyez":
+        if textbox1Value.lower() == "wamlambez" and textboxValue.lower() == "wamnyonyez":
             print("You are Kenyan")
+        else:
+            print("Are you sure you are Kenyan")
 
 if __name__ == '__main__':
     #initialize the qt 
