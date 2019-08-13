@@ -1,26 +1,27 @@
 import tkinter as tk
-
-class window(tk.Tk):
+class Window(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Hello Tkinter")
-        #creating label widget and setting its position using pack method        
-        self.label =tk.Label(self,text ="Choose One")
-        self.label.pack(fill=tk.BOTH, expand=1,padx=100,pady=30)
+        self.label_text = tk.StringVar()
+        self.label_text.set("Choose One")
 
-        #creating button widget,setting position using pack method,calling function using command
-        home_button = tk.Button(self,text="Say Hello",command=self.say_hello)
-        home_button.pack(side=tk.LEFT,padx=(20,0),pady=(0,20))
+        self.label = tk.Label(self, text=self.label_text.get)
+        self.label.pack(fill=tk.BOTH, expand=1, padx=100, pady=30)
 
-        goodbye_button = tk.Button(self,text=("say Goodbye"),command=self.say_goodbye)
-        goodbye_button.pack(side=tk.RIGHT,padx=(0,20),pady=(0,20))
+        hello_button = tk.Button(self, text="Say Hello",
+        command=self.say_hello)
+        hello_button.pack(side=tk.LEFT, padx=(20, 0), pady=(0, 20))
+        goodbye_button = tk.Button(self, text="Say Goodbye",
+        command=self.say_goodbye)
+        goodbye_button.pack(side=tk.RIGHT, padx=(0, 20), pady=(0, 20))
 
-    #defing our functions
+
     def say_hello(self):
-        self.label.configure(text="hello World!")
+        self.label_text.set("Hello World")
     def say_goodbye(self):
-        self.label.configure(text="Goodbye! \n (Closing in 2 seconds)")
-        self.after(2000,self.destroy)
+        self.label_text.set("Goodbye! \n (Closing in 2 seconds)")
+        self.after(2000, self.destroy)
 if __name__ == "__main__":
-    window =window()
+    window = Window()
     window.mainloop()
