@@ -20,10 +20,10 @@ class Window(tk.Tk):
 
 
     def say_hello(self):
-        msgbox.showinfo("Hello","Hello World!")
+        msgbox.showwarning("Hello","Hello World!")
     def say_goodbye(self):
         self.label_text.set("Window will close in 2 seconds")
-        msgbox.showinfo("Goodbye!","Goodbye, it's been fun!")
+        msgbox.showerror("Goodbye!","Goodbye, it's been fun!")
         self.after(2000,self.destroy)
 
 if __name__ == "__main__":
