@@ -1,4 +1,6 @@
 import tkinter as tk
+import tkinter.messagebox as msgbox
+
 class Window(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -6,7 +8,7 @@ class Window(tk.Tk):
         self.label_text = tk.StringVar()
         self.label_text.set("Choose One")
 
-        self.label = tk.Label(self, text=self.label_text.get)
+        self.label = tk.Label(self, textvar=self.label_text)
         self.label.pack(fill=tk.BOTH, expand=1, padx=100, pady=30)
 
         hello_button = tk.Button(self, text="Say Hello",
@@ -18,10 +20,12 @@ class Window(tk.Tk):
 
 
     def say_hello(self):
-        self.label_text.set("Hello World")
+        msgbox.showinfo("Hello","Hello World!")
     def say_goodbye(self):
-        self.label_text.set("Goodbye! \n (Closing in 2 seconds)")
-        self.after(2000, self.destroy)
+        self.label_text.set("Window will close in 2 seconds")
+        msgbox.showinfo("Goodbye!","Goodbye, it's been fun!")
+        self.after(2000,self.destroy)
+
 if __name__ == "__main__":
     window = Window()
     window.mainloop()
