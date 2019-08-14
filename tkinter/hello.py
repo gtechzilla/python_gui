@@ -6,10 +6,15 @@ class Window(tk.Tk):
         super().__init__()
         self.title("Hello Tkinter")
         self.label_text = tk.StringVar()
-        self.label_text.set("Choose One")
+        self.label_text.set("My name is")
 
         self.label = tk.Label(self, textvar=self.label_text)
         self.label.pack(fill=tk.BOTH, expand=1, padx=100, pady=30)
+
+        self.name_text = tk.StringVar()
+        self.name_entry =tk.Entry(self,textvar=self.name_text)
+        self.name_entry.pack(fill=tk.BOTH,expand=1,padx=100,pady=10)
+
 
         hello_button = tk.Button(self, text="Say Hello",
         command=self.say_hello)
@@ -20,11 +25,15 @@ class Window(tk.Tk):
 
 
     def say_hello(self):
-        msgbox.showwarning("Hello","Hello World!")
+        message = "Hello there "+self.name_entry.get()
+        msgbox.showinfo("Hello",message)
     def say_goodbye(self):
-        self.label_text.set("Window will close in 2 seconds")
-        msgbox.showerror("Goodbye!","Goodbye, it's been fun!")
-        self.after(2000,self.destroy)
+        if msgbox.askyesno("Close Window?","Would you like to close this window?"):
+            message = "Window will close in 2 seconds-goodbye" + self.name_text.get()
+            self.label_text.set(message)
+            self.after(2000,self.destroy)
+        else:
+            msgbox.showinfo("Not closing", "Great! This window will stay open")
 
 if __name__ == "__main__":
     window = Window()
